@@ -1,0 +1,31 @@
+
+
+$btn-padding: 16px 32px;
+
+$bg-brand: #1975FF;
+$bg-primary: #141C24;
+$bg-secondary: #344051;
+$bg-tertiary: #637083;
+$bg-invert: #ffffff;
+
+$inter-400: 'Inter-400';
+$inter-500: 'Inter-500';
+$inter-700: 'Inter-700';
+
+@font-face {
+    font-family: 'Inter-400';
+    src: url('/fonts/Inter.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Inter-500';
+    src: url('/fonts/Inter.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Inter-700';
+    src: url('/fonts/Inter.ttf');
+    font-weight: 700;
+}
