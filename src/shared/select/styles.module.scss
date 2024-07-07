@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.container{
+    position: relative;
+}
+
+.select{
+    padding: 8px 8px 8px 30px;
+    border: black solid 1px;
+    border-radius: 8px;
+
+    width: 356px;
+    height: 40px;
+
+    font-size: 16px;
+    font-family: $inter-400;
+}
+
+.icon{
+    position: absolute;
+
+    left: 8px;
+    top: 8px
+}

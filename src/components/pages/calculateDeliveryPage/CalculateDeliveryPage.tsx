@@ -1,4 +1,5 @@
 import styles from './styles.module.scss'
+import { CalculateDeliveryForm } from './CalculateDeliveryForm/CalculateDeliveryForm'
 
 export const CalculateDeliveryPage=()=>{
     
@@ -14,7 +15,7 @@ export const CalculateDeliveryPage=()=>{
                     </h1>
                 </div>
                 <div className={styles.formContainer}>  
-                    formformformformformform
+                    <CalculateDeliveryForm/>
                 </div>
             </div>
         </div>
