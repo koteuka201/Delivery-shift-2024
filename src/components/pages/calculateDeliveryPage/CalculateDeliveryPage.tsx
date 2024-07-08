@@ -1,5 +1,6 @@
 import styles from './styles.module.scss'
 import { CalculateDeliveryForm } from './CalculateDeliveryForm/CalculateDeliveryForm'
+import { Typography } from '../../../shared/Typography/Typography'
 
 export const CalculateDeliveryPage=()=>{
     
@@ -10,9 +11,9 @@ export const CalculateDeliveryPage=()=>{
                     <img src="/CalculateDeliveryPageImg/Frame.svg" alt="Frame" />
                 </div>
                 <div className={styles.h1Container}>
-                    <h1>
+                    <Typography variant='h1'>
                         ЦФТ доставка - быстро, удобно, надежно!
-                    </h1>
+                    </Typography>
                 </div>
                 <div className={styles.formContainer}>  
                     <CalculateDeliveryForm/>

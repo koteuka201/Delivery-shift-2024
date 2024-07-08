@@ -18,14 +18,19 @@
         'size'
         'btn'
     ;
+    grid-template-rows: 30px 1fr 1fr 1fr 1fr;
 
 }
 
 .h2Container{
     grid-area: h2;
+    
+    height: 30px;
 }
 
 .cityFromContainer{
+    margin-top: 24px;
+
     grid-area: cityFrom;
 }
 

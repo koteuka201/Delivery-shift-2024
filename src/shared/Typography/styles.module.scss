@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.h1 {
+    margin: 0;
+
+    font-size: 32px;
+    font-family: $inter-700;
+    color: white;
+}
+
+.h2 {
+    margin: 0;
+
+    font-size: 24px;
+    font-family: $inter-700;
+    color: $bg-primary;
+}
+
+.h3 {
+    //
+}
+
+.p_14_medium {
+    margin: 0;
+
+    font-size: 14px;
+    font-family: $inter-500;
+    color: $bg-secondary;
+}
+
+.p_16_regular {
+    margin: 0;
+
+    font-size: 16px;
+    font-family: $inter-400;
+    color: $bg-primary;
+}
+
+.p_16_medium {
+    font-size: 16px;
+    //
+}
