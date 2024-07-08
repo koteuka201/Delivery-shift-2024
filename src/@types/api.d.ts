@@ -11,3 +11,46 @@ export interface DeliveryPoints{
     reason?: string,
     points: Point[]
 }
+
+interface Address{
+    street: string,
+    house: string,
+    apartment: string,
+    comment: string,
+}
+
+interface Client{
+    firstname: string,
+    lastname: string,
+    middlename: string,
+    phone: string,
+}
+
+interface Option{
+    id: string,
+    price: number,
+    days: number,
+    name: string,
+    type:TypeDelivery
+}
+
+enum Payer{
+    RECEIVER,
+    SENDER
+}
+
+enum TypeDelivery{
+    DEFAULT,
+    EXPRESS
+}
+
+export interface DeliveryRequest{
+    senderPoint: Point,
+    senderAddress: Address,
+    sender: Client,
+    receiverPoint: Point,
+    receiverAddress: Address,
+    receiver: Client,
+    payer: Payer,
+    option: Option
+}

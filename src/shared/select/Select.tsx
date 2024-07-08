@@ -24,13 +24,13 @@ export const Select = ({options, icon,value, onChange}: SelectProps)=>{
     }
         
     return(
-        <div className={styles.container}>
+        <div 
+            className={styles.container} 
+            onClick={()=>setIsOpen(!isOpen)}
+        >
             <span className={styles.icon}>{icon}</span>
             <div className={`${styles.select} ${isOpen && styles.open}`}>
-                <div
-                    className={styles.value}
-                    onClick={()=>setIsOpen(!isOpen)}
-                >
+                <div className={styles.value}>
                     {value}
                 </div>
                 {isOpen && (
