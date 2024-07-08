@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './styles.module.scss'
 
@@ -10,7 +10,7 @@ import { MapPin } from 'lucide-react'
 import { Navigation } from 'lucide-react'
 
 export const CalculateDeliveryForm = ()=>{
-    const {data} = useGetDeliveryPointsQuery()
+    const {data, isLoading} = useGetDeliveryPointsQuery()
 
     const [cityFrom, setCityFrom]=useState(data?.points[0])
 
@@ -18,6 +18,11 @@ export const CalculateDeliveryForm = ()=>{
         const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
         setCityFrom(selectedDeliveryPoint)
     }
+    console.log(cityFrom)
+
+    useEffect(()=>{
+        setCityFrom(data?.points[0])
+    },[isLoading])
 
     return(
         <form className={styles.container}>
@@ -33,10 +38,11 @@ export const CalculateDeliveryForm = ()=>{
                 {data && <Select 
                     options={data.points} 
                     icon={<MapPin/>} 
+                    value={cityFrom?.name}
                     onChange={handleCityFromChange}
                 />}
             </div>
-            <div className={styles.cityToContainer}>
+            {/* <div className={styles.cityToContainer}>
                 <Typography variant='p_14_medium'>
                     Город назначения
                 </Typography>
@@ -45,7 +51,7 @@ export const CalculateDeliveryForm = ()=>{
                     icon={<Navigation/>} 
                     onChange={handleCityFromChange}
                 />}
-            </div>
+            </div> */}
         </form>
     )
 }
