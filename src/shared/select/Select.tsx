@@ -7,12 +7,15 @@ interface SelectProps extends React.ComponentProps<'select'>{
     icon?: JSX.Element
 }
 
-export const Select = ({options, icon}: SelectProps)=>{
-
+export const Select = ({options, icon, onChange}: SelectProps)=>{
+    
     return(
         <div className={styles.container}>
             <span className={styles.icon}>{icon}</span>
-            <select className={styles.select}>
+            <select 
+                className={styles.select}
+                onChange={onChange}
+            >
                 {options.map((option)=>(
                     <option key={option.id} value={option.id}>
                         {option.name}     

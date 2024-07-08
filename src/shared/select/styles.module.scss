@@ -5,8 +5,10 @@
 }
 
 .select{
-    padding: 8px 8px 8px 30px;
-    border: black solid 1px;
+    margin-top: 6px;
+    padding: 8px 8px 8px 32px;
+
+    border: $content-07 solid 1px;
     border-radius: 8px;
 
     width: 356px;
@@ -15,12 +17,27 @@
     font-size: 16px;
     font-family: $inter-400;
     color: $bg-secondary;
-}
 
+    appearance: none;
+    background-image: url('/select/ChevronDown.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+
+    transition: background-color 0.3s;
+    &:hover{
+        background-color: #F3F4F6;
+    }
+
+    &:focus{
+        background-image: url('/select/ChevronUp.png');
+        background-color: white;
+    }
+    
+}
 
 .icon{
     position: absolute;
 
     left: 8px;
-    top: 8px
+    top: 12px
 }

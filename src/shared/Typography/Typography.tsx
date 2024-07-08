@@ -20,11 +20,11 @@ const variantMapping: { [key in TypographyVariant]: keyof JSX.IntrinsicElements 
     p_16_regular: 'p'
 }
 
-export const Typography = ({ variant, children }: TypographyProps) => {
+export const Typography = ({ variant, children, className }: TypographyProps) => {
     const Component = variantMapping[variant]
 
     return (
-        <Component className={`${styles[variant]}`}>
+        <Component className={`${styles[variant]} ${className}`}>
             {children}
         </Component>
     )
