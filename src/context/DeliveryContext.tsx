@@ -10,6 +10,11 @@ const DeliveryContext = createContext<DeliveryContextProps | undefined>(undefine
 
 export const useDeliveryContext = () =>{
     const context = useContext(DeliveryContext)
+
+    if (context === undefined) {
+        throw new Error("err");
+    }
+
     return context
 }
 
