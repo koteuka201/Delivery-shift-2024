@@ -74,8 +74,6 @@ export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
                                     onClick={()=>handleSelectOption(option)}
                                     className={styles.option}
                                 >
-                                    {/* value={`${packageType?.name}  ${packageType?.length}x${packageType?.width}x${packageType?.height} см`} */}
-
                                     {type==='package' ? (
                                         ('width' && 'length' && 'height') in option && `${option.name} ${option.length}x${option.width}x${option.height} см`
                                     ) :(
