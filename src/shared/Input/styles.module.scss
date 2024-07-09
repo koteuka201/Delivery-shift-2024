@@ -19,6 +19,8 @@
 }
 
 .label{
+    margin-bottom: 6px;
+
     font-family: $inter-400;
     font-size: 14px;
 
@@ -26,5 +28,9 @@
 }
 
 .message{
+    margin-top: 4px;
 
+    font-family: $inter-400;
+    font-size: 14px;
+    color: $bg-error;
 }
