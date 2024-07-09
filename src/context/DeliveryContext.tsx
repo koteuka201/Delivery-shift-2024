@@ -1,9 +1,13 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { DeliveryRequest } from "../@types/api";
+import { DeliveryRequest, Package } from "../@types/api";
 
 interface DeliveryContextProps{
     deliveryRequest: DeliveryRequest | undefined,
     updateDeliveryRequest: (updates: Partial<DeliveryRequest>)=>void
+
+    deliveryPackage: Package | undefined,
+    updateDeliveryPackage: (updates: Partial<Package>) => void,
+    setDeliveryPackage: (newPackage: Package | undefined) => void
 }
 
 const DeliveryContext = createContext<DeliveryContextProps | undefined>(undefined)
@@ -21,6 +25,7 @@ export const useDeliveryContext = () =>{
 export const DeliveryContextProvider = (props: {children:ReactNode})=>{
 
     const [deliveryRequest, setDeliveryRequest]=useState<DeliveryRequest>()
+    const [deliveryPackage, setDeliveryPackage] = useState<Package>();
 
     const updateDeliveryRequest = (updates: Partial<DeliveryRequest>) => {
         setDeliveryRequest((prev) => {
@@ -29,11 +34,24 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
             }
             return { ...prev, ...updates }
         })
-    };
+    }
+
+    const updateDeliveryPackage = (updates: Partial<Package>) => {
+        setDeliveryPackage((prev) => {
+            if (prev === undefined) {
+                return { ...updates } as Package
+            }
+            return { ...prev, ...updates }
+        })
+    }
 
     const value={
         deliveryRequest,
-        updateDeliveryRequest
+        updateDeliveryRequest,
+
+        deliveryPackage,
+        updateDeliveryPackage,
+        setDeliveryPackage
     }
 
     return <DeliveryContext.Provider value={value}>{props.children}</DeliveryContext.Provider>

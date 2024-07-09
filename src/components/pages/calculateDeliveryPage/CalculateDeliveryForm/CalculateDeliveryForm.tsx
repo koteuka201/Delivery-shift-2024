@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import styles from './styles.module.scss'
 
@@ -9,7 +9,6 @@ import { Select } from '../../../../shared/Select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
 
 import { MapPin, Mail, Navigation } from 'lucide-react'
-import { Package } from '../../../../@types/api'
 
 export const CalculateDeliveryForm = ()=>{
 
@@ -17,9 +16,7 @@ export const CalculateDeliveryForm = ()=>{
     const packagesQueryData = useGetDeliveryPackagesQuery().data
     const packageQueryIsLoading = useGetDeliveryPackagesQuery().isLoading
     
-    const { deliveryRequest , updateDeliveryRequest }=useDeliveryContext()
-
-    const [packageType, setPackageType]=useState<Package>()
+    const { deliveryRequest , updateDeliveryRequest, deliveryPackage, setDeliveryPackage }=useDeliveryContext()
 
     const handleCityFromChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
@@ -33,13 +30,13 @@ export const CalculateDeliveryForm = ()=>{
 
     const handlePackageChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         const selectedDeliveryPoint = packagesQueryData?.packages.find(packages => packages.id === e.target.value)
-        setPackageType(selectedDeliveryPoint)
+        setDeliveryPackage(selectedDeliveryPoint)
     }
 
     useEffect(()=>{
         updateDeliveryRequest({senderPoint: data?.points[0]})
         updateDeliveryRequest({receiverPoint: data?.points[0]})
-        setPackageType(packagesQueryData?.packages[0])
+        setDeliveryPackage(packagesQueryData?.packages[0])
     },[isLoading,packageQueryIsLoading])
 
     return(
@@ -84,7 +81,7 @@ export const CalculateDeliveryForm = ()=>{
                         options={packagesQueryData?.packages} 
                         type='package'
                         icon={<Mail/>} 
-                        value={`${packageType?.name}  ${packageType?.length}x${packageType?.width}x${packageType?.height} см`}
+                        value={`${deliveryPackage?.name}  ${deliveryPackage?.length}x${deliveryPackage?.width}x${deliveryPackage?.height} см`}
                         onChange={handlePackageChange}
                     />
                 }

@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { forwardRef, useId } from 'react'
 import styles from './styles.module.scss'
 
 interface InputProps extends React.ComponentProps<'input'>{
@@ -7,19 +7,18 @@ interface InputProps extends React.ComponentProps<'input'>{
     message?: string
 }
 
-export const Input = ({isError, label, message, ...props}:InputProps)=>{
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, label, message, ...props }, ref) => {
+    const id = useId()
 
-    const id=useId()
-
-    return(
+    return (
         <div>
             {label && (
                 <label className={styles.label} htmlFor={id}>
                     {label}
                 </label>
             )}
-            <input {...props} id={id} className={styles.input}/>
+            <input {...props} ref={ref} id={id} className={styles.input} />
             {message && <p className={styles.message}>{message}</p>}
         </div>
     )
-}
+})
