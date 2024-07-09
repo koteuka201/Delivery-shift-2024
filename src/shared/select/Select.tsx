@@ -1,18 +1,23 @@
 import styles from './styles.module.scss'
 
-import { Point } from '../../@types/api'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+
+import { Package, Point } from '../../@types/api'
 
 interface SelectProps extends React.ComponentProps<'select'>{
-    options: Point[]
+    options: Point[] | Package[]
+    type?: string,
     icon?: JSX.Element
 }
 
-export const Select = ({options, icon,value, onChange}: SelectProps)=>{
+export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
 
-    const [isOpen, setIsOpen]=useState(false)
+    const [isSelectOpen, setIsSelectOpen]=useState(false)
+    const [tabType, setTabType]=useState<'Concrete' | 'Free'>('Concrete')
 
-    const handleSelectOption=(option: Point)=>{
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    const handleSelectOption=(option: Point | Package)=>{
 
         if (onChange) {
             const e = {
@@ -20,43 +25,69 @@ export const Select = ({options, icon,value, onChange}: SelectProps)=>{
             } as React.ChangeEvent<HTMLSelectElement>;
             onChange(e)
         }
-        setIsOpen(false)
+        setIsSelectOpen(false)
     }
-        
+    
+    const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+        if (!containerRef.current?.contains(e.relatedTarget as Node)) {
+            setIsSelectOpen(false);
+        }
+    }
+
     return(
         <div 
             className={styles.container} 
-            onClick={()=>setIsOpen(!isOpen)}
+            onBlur={handleBlur}
+            tabIndex={-1}
         >
             <span className={styles.icon}>{icon}</span>
-            <div className={`${styles.select} ${isOpen && styles.open}`}>
-                <div className={styles.value}>
+            <div className={`${styles.select} ${isSelectOpen && styles.open}`}>
+                <div 
+                    className={styles.value}
+                    onClick={()=>setIsSelectOpen(!isSelectOpen)}
+                >
                     {value}
                 </div>
-                {isOpen && (
-                    <div className={styles.options}>
-                        {options.map((option)=>(
-                            <div
-                                key={option.id}
-                                onClick={()=>handleSelectOption(option)}
-                                className={styles.option}
-                            >
-                                {option.name}
+                {isSelectOpen && (
+                    <div className={styles.optionsContainer}>
+                        {type==='package' && (
+                            <div className={styles.tabContainer}>
+                                <div 
+                                    className={`${styles.tab} ${tabType==='Concrete' && styles.selected}`}
+                                    onClick={()=>setTabType('Concrete')}
+                                >
+                                    Примерные
+                                </div>
+                                <div 
+                                    className={`${styles.tab} ${tabType==='Free' && styles.selected}`}
+                                    onClick={()=>setTabType('Free')}
+                                >
+                                    Точные
+                                </div>
+
                             </div>
-                        ))}
+                        )}
+                        <div className={styles.options}>
+                            {options.map((option)=>(
+                                <div
+                                    key={option.id}
+                                    onClick={()=>handleSelectOption(option)}
+                                    className={styles.option}
+                                >
+                                    {/* value={`${packageType?.name}  ${packageType?.length}x${packageType?.width}x${packageType?.height} см`} */}
+
+                                    {type==='package' ? (
+                                        ('width' && 'length' && 'height') in option && `${option.name} ${option.length}x${option.width}x${option.height} см`
+                                    ) :(
+                                        option.name
+                                    )}
+                                    
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>
-            {/* <select 
-                className={styles.select}
-                onChange={onChange}
-            >
-                {options.map((option)=>(
-                    <option key={option.id} value={option.id}>
-                        {option.name}     
-                    </option>
-                ))}
-            </select> */}
         </div>
     )
 }

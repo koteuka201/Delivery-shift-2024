@@ -1,19 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './styles.module.scss'
 
 import { useGetDeliveryPointsQuery } from '../../../../hooks/useGetDeliveyPointsQuery'
+import { useGetDeliveryPackagesQuery } from '../../../../hooks/useGetDeliveryPackageQuery'
 import { useDeliveryContext } from '../../../../context/DeliveryContext'
 import { Select } from '../../../../shared/Select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
 
-import { MapPin } from 'lucide-react'
-import { Navigation } from 'lucide-react'
+import { MapPin, Mail, Navigation } from 'lucide-react'
+import { Package } from '../../../../@types/api'
 
 export const CalculateDeliveryForm = ()=>{
+
     const {data, isLoading} = useGetDeliveryPointsQuery()
+    const packagesQueryData = useGetDeliveryPackagesQuery().data
+    const packageQueryIsLoading = useGetDeliveryPackagesQuery().isLoading
     
     const { deliveryRequest , updateDeliveryRequest }=useDeliveryContext()
+
+    const [packageType, setPackageType]=useState<Package>()
 
     const handleCityFromChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
@@ -25,10 +31,16 @@ export const CalculateDeliveryForm = ()=>{
         updateDeliveryRequest({receiverPoint: selectedDeliveryPoint})
     }
 
+    const handlePackageChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+        const selectedDeliveryPoint = packagesQueryData?.packages.find(packages => packages.id === e.target.value)
+        setPackageType(selectedDeliveryPoint)
+    }
+
     useEffect(()=>{
         updateDeliveryRequest({senderPoint: data?.points[0]})
         updateDeliveryRequest({receiverPoint: data?.points[0]})
-    },[isLoading])
+        setPackageType(packagesQueryData?.packages[0])
+    },[isLoading,packageQueryIsLoading])
 
     return(
         <form className={styles.container}>
@@ -60,6 +72,20 @@ export const CalculateDeliveryForm = ()=>{
                         icon={<Navigation/>} 
                         value={deliveryRequest?.receiverPoint.name}
                         onChange={handleCityToChange}
+                    />
+                }
+            </div>
+            <div className={styles.sizeContainer}>
+                <Typography variant='p_14_medium'>
+                    Размер назначения
+                </Typography>
+                {data && packagesQueryData?.packages &&  
+                    <Select 
+                        options={packagesQueryData?.packages} 
+                        type='package'
+                        icon={<Mail/>} 
+                        value={`${packageType?.name}  ${packageType?.length}x${packageType?.width}x${packageType?.height} см`}
+                        onChange={handlePackageChange}
                     />
                 }
             </div>

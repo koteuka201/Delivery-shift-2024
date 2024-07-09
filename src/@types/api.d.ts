@@ -54,3 +54,18 @@ export interface DeliveryRequest{
     payer: Payer,
     option: Option
 }
+
+export interface Package{
+    id: string,
+    name: string,
+    length: number,
+    width: number,
+    weight: number,
+    height: number
+}
+
+export interface DeliveryPackage{
+    success: boolean,
+    reason?: string,
+    packages: Package[]
+}
