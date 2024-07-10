@@ -9,6 +9,7 @@ import { Select } from '../../../../shared/Select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
 
 import { MapPin, Mail, Navigation } from 'lucide-react'
+import { Button } from '../../../../shared/Button/Button'
 
 export const CalculateDeliveryForm = ()=>{
 
@@ -85,6 +86,14 @@ export const CalculateDeliveryForm = ()=>{
                         onChange={handlePackageChange}
                     />
                 }
+            </div>
+            <div className={styles.btnContainer}>
+                <Button 
+                    targetButton='Next'
+                
+                >
+                    Продолжить
+                </Button>
             </div>
         </form>
     )

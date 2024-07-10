@@ -9,9 +9,11 @@ $bg-tertiary: #637083;
 $bg-invert: #ffffff;
 $content-07: #CED2DA;
 $bg-error: #F64C4C;
+$btn-hover: #0052CC;
 
 $inter-400: 'Inter-400';
 $inter-500: 'Inter-500';
+$inter-600: 'Inter-600';
 $inter-700: 'Inter-700';
 
 $card-radius: 24px;
@@ -26,6 +28,12 @@ $card-radius: 24px;
     font-family: 'Inter-500';
     src: url('/fonts/Inter.ttf');
     font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Inter-600';
+    src: url('/fonts/Inter.ttf');
+    font-weight: 600;
 }
 
 @font-face {

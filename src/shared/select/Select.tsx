@@ -3,7 +3,6 @@ import styles from './styles.module.scss'
 import { useRef, useState } from 'react'
 
 import { Package, Point } from '../../@types/api'
-import { Input } from '../Input/Input'
 import { useDeliveryContext } from '../../context/DeliveryContext'
 import { Tab } from '../Tab/Tab'
 import { PackageInputs } from '../../components/pages/calculateDeliveryPage/CalculateDeliveryForm/PackageInputs/PackageInputs'
@@ -25,7 +24,7 @@ export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
     const heightInputRef = useRef<HTMLInputElement>(null)
     const weightInputRef = useRef<HTMLInputElement>(null)
 
-    const {deliveryPackage, updateDeliveryPackage}=useDeliveryContext()
+    const {updateDeliveryPackage}=useDeliveryContext()
 
     const handleSelectOption=(option: Point | Package)=>{
 
