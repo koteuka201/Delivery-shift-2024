@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 import styles from './styles.module.scss'
 
 import { useGetDeliveryPointsQuery } from '../../../../hooks/useGetDeliveyPointsQuery'
 import { useGetDeliveryPackagesQuery } from '../../../../hooks/useGetDeliveryPackageQuery'
 import { useDeliveryContext } from '../../../../context/DeliveryContext'
-import { Select } from '../../../../shared/Select/Select'
+import { Select } from '../../../../shared/select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
 
 import { MapPin, Mail, Navigation } from 'lucide-react'
 import { Button } from '../../../../shared/Button/Button'
+import { Label } from '../../../../shared/Label/Label'
 
 export const CalculateDeliveryForm = ()=>{
 
@@ -18,6 +20,8 @@ export const CalculateDeliveryForm = ()=>{
     const packageQueryIsLoading = useGetDeliveryPackagesQuery().isLoading
     
     const { deliveryRequest , updateDeliveryRequest, deliveryPackage, setDeliveryPackage }=useDeliveryContext()
+
+    const {handleSubmit } = useForm()
 
     const handleCityFromChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
         const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
@@ -34,6 +38,10 @@ export const CalculateDeliveryForm = ()=>{
         setDeliveryPackage(selectedDeliveryPoint)
     }
 
+    const onSubmit = () => {
+        console.log('tap')
+    }
+
     useEffect(()=>{
         updateDeliveryRequest({senderPoint: data?.points[0]})
         updateDeliveryRequest({receiverPoint: data?.points[0]})
@@ -41,7 +49,7 @@ export const CalculateDeliveryForm = ()=>{
     },[isLoading,packageQueryIsLoading])
 
     return(
-        <form className={styles.container}>
+        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.h2Container}>
                 <Typography variant='h2'>
                     Рассчитать доставку
@@ -59,6 +67,17 @@ export const CalculateDeliveryForm = ()=>{
                         onChange={handleCityFromChange}
                     />
                 }
+                <div className={styles.cityFastPick}>
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[1]})} variant='underline'>
+                        {data?.points[1].name}
+                    </Label>
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[2]})} variant='underline'>
+                        {data?.points[2].name}
+                    </Label>
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[11]})} variant='underline'>
+                        {data?.points[11].name}
+                    </Label>
+                </div>
             </div>
             <div className={styles.cityToContainer}>
                 <Typography variant='p_14_medium'>
@@ -72,6 +91,17 @@ export const CalculateDeliveryForm = ()=>{
                         onChange={handleCityToChange}
                     />
                 }
+                <div className={styles.cityFastPick}>
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[0]})} variant='underline'>
+                        {data?.points[0].name}
+                    </Label>
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[2]})} variant='underline'>
+                        {data?.points[2].name}
+                    </Label>
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[11]})} variant='underline'>
+                        {data?.points[11].name}
+                    </Label>
+                </div>
             </div>
             <div className={styles.sizeContainer}>
                 <Typography variant='p_14_medium'>
@@ -90,7 +120,7 @@ export const CalculateDeliveryForm = ()=>{
             <div className={styles.btnContainer}>
                 <Button 
                     targetButton='Next'
-                
+                    type="submit"
                 >
                     Продолжить
                 </Button>
