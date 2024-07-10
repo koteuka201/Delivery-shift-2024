@@ -1,0 +1,36 @@
+@import '../../styles/variables.scss';
+
+.input{
+    max-width: 100%;
+    height: 24px;
+
+    border: $content-07 solid 1px;
+    border-radius: 8px;
+
+    padding: 12px 8px 12px 12px;
+
+    font-size: 16px;
+    font-family: $inter-400;
+    color: $bg-tertiary;
+
+    &.error{
+        border: $bg-error solid 2px;
+    }
+}
+
+.label{
+    margin-bottom: 6px;
+
+    font-family: $inter-400;
+    font-size: 14px;
+
+    color: $bg-primary;
+}
+
+.message{
+    margin-top: 4px;
+
+    font-family: $inter-400;
+    font-size: 14px;
+    color: $bg-error;
+}
