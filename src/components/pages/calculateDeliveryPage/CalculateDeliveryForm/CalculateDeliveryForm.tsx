@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 import { useGetDeliveryPointsQuery } from '../../../../hooks/useGetDeliveyPointsQuery'
 import { useGetDeliveryPackagesQuery } from '../../../../hooks/useGetDeliveryPackageQuery'
 import { useDeliveryContext } from '../../../../context/DeliveryContext'
-import { Select } from '../../../../shared/Select/Select'
+import { Select } from '../../../../shared/select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
 
 import { MapPin, Mail, Navigation } from 'lucide-react'
