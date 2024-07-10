@@ -74,7 +74,7 @@ export const CalculateDeliveryForm = ()=>{
             </div>
             <div className={styles.sizeContainer}>
                 <Typography variant='p_14_medium'>
-                    Размер назначения
+                    Размер посылки
                 </Typography>
                 {data && packagesQueryData?.packages &&  
                     <Select 

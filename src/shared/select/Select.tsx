@@ -6,6 +6,7 @@ import { Package, Point } from '../../@types/api'
 import { Input } from '../Input/Input'
 import { useDeliveryContext } from '../../context/DeliveryContext'
 import { Tab } from '../Tab/Tab'
+import { PackageInputs } from '../../components/pages/calculateDeliveryPage/CalculateDeliveryForm/PackageInputs/PackageInputs'
 
 interface SelectProps extends React.ComponentProps<'select'>{
     options: Point[] | Package[]
@@ -64,24 +65,6 @@ export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
                 {isSelectOpen && (
                     <div className={styles.optionsContainer}>
                         {type==='package' && (
-                            // <div className={styles.tabContainer}>
-                            //     <div 
-                            //         className={`${styles.tab} ${tabType==='Concrete' && styles.selected}`}
-                            //         onClick={()=>setTabType('Concrete')}
-                            //     >
-                            //         Примерные
-                            //     </div>
-                            //     <div 
-                            //         className={`${styles.tab} ${tabType==='Free' && styles.selected}`}
-                            //         onClick={()=>{
-                            //             setTabType('Free')
-                            //             updateDeliveryPackage({ name: ''})
-                            //         }}
-                            //     >
-                            //         Точные
-                            //     </div>
-
-                            // </div>
                             <Tab 
                                 nameTab1={'Примерный'}
                                 nameTab2={'Определенный'}
@@ -94,52 +77,12 @@ export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
                             />
                         )}
                         {type==='package' && tabType==='Free' ? (
-                            <div className={styles.freeSizeOption}>
-                                Длина <Input 
-                                        ref={lengthInputRef}
-                                        value={deliveryPackage?.length} 
-                                        onChange={(e) => {
-                                            const newValue = isNaN(parseFloat(e.target.value)) ? 1 : parseFloat(e.target.value)
-                                            updateDeliveryPackage({ length: newValue })
-                                        }} 
-                                        placeholder='см' 
-                                        type='number'
-                                        min={1}
-                                        />
-                                Ширина <Input 
-                                        ref={widthInputRef}
-                                        value={deliveryPackage?.width} 
-                                        onChange={(e) => {
-                                            const newValue = isNaN(parseFloat(e.target.value)) ? 1 : parseFloat(e.target.value)
-                                            updateDeliveryPackage({ width: newValue })
-                                        }} 
-                                        placeholder='см' 
-                                        type='number'
-                                        min={1}
-                                        />
-                                Высота <Input 
-                                        ref={heightInputRef}
-                                        value={deliveryPackage?.height} 
-                                        onChange={(e) => {
-                                            const newValue = isNaN(parseFloat(e.target.value)) ? 1 : parseFloat(e.target.value)
-                                            updateDeliveryPackage({ height: newValue })
-                                        }} 
-                                        placeholder='см' 
-                                        type='number'
-                                        min={1}
-                                        />
-                                Вес <Input 
-                                        ref={weightInputRef}
-                                        value={deliveryPackage?.weight} 
-                                        onChange={(e) => {
-                                            const newValue = isNaN(parseFloat(e.target.value)) ? 1 : parseFloat(e.target.value)
-                                            updateDeliveryPackage({ weight: newValue })
-                                        }} 
-                                        placeholder='кг' 
-                                        type='number'
-                                        min={1}
-                                        />
-                            </div>
+                            <PackageInputs
+                                lengthRef={lengthInputRef}
+                                widthRef={widthInputRef}
+                                heightRef={heightInputRef}
+                                weightRef={weightInputRef}
+                            />
                         ) : (
                             <div className={styles.options}>
                                 {options.map((option)=>(

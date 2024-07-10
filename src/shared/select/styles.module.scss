@@ -77,39 +77,6 @@
     }
 }
 
-.tabContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    width: 356px;
-    height: 44px;
-
-    border-radius: 16px;
-
-    margin-bottom: 16px;
-
-    background-color: $bg-secondary;
-
-    font-weight: 400;
-    font-size: 14px;
-
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-.tab{
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 16px;
-
-    &.selected{
-        background-color: white;
-        color: $bg-primary;
-    }
-}
 
 .freeSizeOption{
     display: grid;
