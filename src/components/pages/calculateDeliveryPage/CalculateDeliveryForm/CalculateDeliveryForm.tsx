@@ -8,45 +8,48 @@ import { useGetDeliveryPackagesQuery } from '../../../../hooks/useGetDeliveryPac
 import { useDeliveryContext } from '../../../../context/DeliveryContext'
 import { Select } from '../../../../shared/select/Select'
 import { Typography } from '../../../../shared/Typography/Typography'
-
+import { ROUTES } from '../../../../utils/constants/routes'
 import { MapPin, Mail, Navigation } from 'lucide-react'
 import { Button } from '../../../../shared/Button/Button'
 import { Label } from '../../../../shared/Label/Label'
+import { useNavigate } from 'react-router-dom'
 
 export const CalculateDeliveryForm = ()=>{
 
-    const {data, isLoading} = useGetDeliveryPointsQuery()
-    const packagesQueryData = useGetDeliveryPackagesQuery().data
-    const packageQueryIsLoading = useGetDeliveryPackagesQuery().isLoading
+    const navigate= useNavigate()
+
+    const getDeliveryPointsQuery = useGetDeliveryPointsQuery()
+    const getPackagesQueryData = useGetDeliveryPackagesQuery()
     
     const { deliveryRequest , updateDeliveryRequest, deliveryPackage, setDeliveryPackage }=useDeliveryContext()
 
     const {handleSubmit } = useForm()
 
     const handleCityFromChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-        const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
+        const selectedDeliveryPoint = getDeliveryPointsQuery.data?.points.find(option => option.id === e.target.value)
         updateDeliveryRequest({senderPoint: selectedDeliveryPoint})
     }
 
     const handleCityToChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-        const selectedDeliveryPoint = data?.points.find(option => option.id === e.target.value)
+        const selectedDeliveryPoint = getDeliveryPointsQuery.data?.points.find(option => option.id === e.target.value)
         updateDeliveryRequest({receiverPoint: selectedDeliveryPoint})
     }
 
     const handlePackageChange = (e: React.ChangeEvent<HTMLSelectElement>) =>{
-        const selectedDeliveryPoint = packagesQueryData?.packages.find(packages => packages.id === e.target.value)
+        const selectedDeliveryPoint = getPackagesQueryData.data?.packages.find(packages => packages.id === e.target.value)
         setDeliveryPackage(selectedDeliveryPoint)
     }
 
     const onSubmit = () => {
         console.log('tap')
+        navigate(`${ROUTES.DELIVERY_TYPE}`)
     }
 
     useEffect(()=>{
-        updateDeliveryRequest({senderPoint: data?.points[0]})
-        updateDeliveryRequest({receiverPoint: data?.points[0]})
-        setDeliveryPackage(packagesQueryData?.packages[0])
-    },[isLoading,packageQueryIsLoading])
+        updateDeliveryRequest({senderPoint: getDeliveryPointsQuery.data?.points[0]})
+        updateDeliveryRequest({receiverPoint: getDeliveryPointsQuery.data?.points[0]})
+        setDeliveryPackage(getPackagesQueryData.data?.packages[0])
+    },[getDeliveryPointsQuery.isLoading,getPackagesQueryData.isLoading])
 
     return(
         <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -59,23 +62,23 @@ export const CalculateDeliveryForm = ()=>{
                 <Typography variant='p_14_medium'>
                     Город отправки
                 </Typography>
-                {data && deliveryRequest?.senderPoint &&  
+                {getDeliveryPointsQuery.data && deliveryRequest?.senderPoint &&  
                     <Select 
-                        options={data.points} 
+                        options={getDeliveryPointsQuery.data.points} 
                         icon={<MapPin/>} 
                         value={deliveryRequest?.senderPoint.name}
                         onChange={handleCityFromChange}
                     />
                 }
                 <div className={styles.cityFastPick}>
-                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[1]})} variant='underline'>
-                        {data?.points[1].name}
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: getDeliveryPointsQuery.data?.points[1]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[1].name}
                     </Label>
-                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[2]})} variant='underline'>
-                        {data?.points[2].name}
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: getDeliveryPointsQuery.data?.points[2]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[2].name}
                     </Label>
-                    <Label onClick={()=>updateDeliveryRequest({senderPoint: data?.points[11]})} variant='underline'>
-                        {data?.points[11].name}
+                    <Label onClick={()=>updateDeliveryRequest({senderPoint: getDeliveryPointsQuery.data?.points[11]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[11].name}
                     </Label>
                 </div>
             </div>
@@ -83,23 +86,23 @@ export const CalculateDeliveryForm = ()=>{
                 <Typography variant='p_14_medium'>
                     Город отправки
                 </Typography>
-                {data && deliveryRequest?.receiverPoint &&  
+                {getDeliveryPointsQuery.data && deliveryRequest?.receiverPoint &&  
                     <Select 
-                        options={data.points} 
+                        options={getDeliveryPointsQuery.data.points} 
                         icon={<Navigation/>} 
                         value={deliveryRequest?.receiverPoint.name}
                         onChange={handleCityToChange}
                     />
                 }
                 <div className={styles.cityFastPick}>
-                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[0]})} variant='underline'>
-                        {data?.points[0].name}
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: getDeliveryPointsQuery.data?.points[0]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[0].name}
                     </Label>
-                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[2]})} variant='underline'>
-                        {data?.points[2].name}
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: getDeliveryPointsQuery.data?.points[2]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[2].name}
                     </Label>
-                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: data?.points[11]})} variant='underline'>
-                        {data?.points[11].name}
+                    <Label onClick={()=>updateDeliveryRequest({receiverPoint: getDeliveryPointsQuery.data?.points[11]})} variant='underline'>
+                        {getDeliveryPointsQuery.data?.points[11].name}
                     </Label>
                 </div>
             </div>
@@ -107,9 +110,9 @@ export const CalculateDeliveryForm = ()=>{
                 <Typography variant='p_14_medium'>
                     Размер посылки
                 </Typography>
-                {data && packagesQueryData?.packages &&  
+                {getDeliveryPointsQuery.data && getPackagesQueryData.data?.packages &&  
                     <Select 
-                        options={packagesQueryData?.packages} 
+                        options={getPackagesQueryData.data?.packages} 
                         type='package'
                         icon={<Mail/>} 
                         value={`${deliveryPackage?.name}  ${deliveryPackage?.length}x${deliveryPackage?.width}x${deliveryPackage?.height} см`}

@@ -6,10 +6,10 @@ import { useDeliveryContext } from "../../../../../context/DeliveryContext";
 import styles from './styles.module.scss'
 
 interface PackageInputsProps {
-    lengthRef: React.RefObject<HTMLInputElement>,
-    widthRef: React.RefObject<HTMLInputElement>,
-    heightRef: React.RefObject<HTMLInputElement>,
-    weightRef: React.RefObject<HTMLInputElement>
+    lengthRef?: React.RefObject<HTMLInputElement>,
+    widthRef?: React.RefObject<HTMLInputElement>,
+    heightRef?: React.RefObject<HTMLInputElement>,
+    weightRef?: React.RefObject<HTMLInputElement>
 }
 
 export const PackageInputs = forwardRef<HTMLDivElement, PackageInputsProps>(({ lengthRef, widthRef, heightRef, weightRef }, ref) => {
