@@ -16,8 +16,20 @@
     color: $bg-primary;
 }
 
-.h3 {
-    //
+.h3{
+    margin: 0;
+
+    font-size: 20px;
+    font-family: $inter-600;
+    color: $bg-primary;
+}
+
+.p_12_regular{
+    margin: 0;
+
+    font-size: 12px;
+    font-family: $inter-400;
+    color: $bg-tertiary;
 }
 
 .p_14_medium {

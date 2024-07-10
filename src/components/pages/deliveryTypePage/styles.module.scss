@@ -1,0 +1,21 @@
+@import '../../../styles/variables.scss';
+
+.containerWrapper{
+    display: flex;
+    justify-content: center;
+
+    margin-top: 48px;
+    
+}
+
+.typesWrapper{
+    width: 960px;
+}
+
+.typesContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;   
+
+    margin-top: 24px;
+}
