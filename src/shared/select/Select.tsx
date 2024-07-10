@@ -5,6 +5,7 @@ import { useRef, useState } from 'react'
 import { Package, Point } from '../../@types/api'
 import { Input } from '../Input/Input'
 import { useDeliveryContext } from '../../context/DeliveryContext'
+import { Tab } from '../Tab/Tab'
 
 interface SelectProps extends React.ComponentProps<'select'>{
     options: Point[] | Package[]
@@ -63,24 +64,34 @@ export const Select = ({options, icon, type, value, onChange}: SelectProps)=>{
                 {isSelectOpen && (
                     <div className={styles.optionsContainer}>
                         {type==='package' && (
-                            <div className={styles.tabContainer}>
-                                <div 
-                                    className={`${styles.tab} ${tabType==='Concrete' && styles.selected}`}
-                                    onClick={()=>setTabType('Concrete')}
-                                >
-                                    Примерные
-                                </div>
-                                <div 
-                                    className={`${styles.tab} ${tabType==='Free' && styles.selected}`}
-                                    onClick={()=>{
-                                        setTabType('Free')
-                                        updateDeliveryPackage({ name: ''})
-                                    }}
-                                >
-                                    Точные
-                                </div>
+                            // <div className={styles.tabContainer}>
+                            //     <div 
+                            //         className={`${styles.tab} ${tabType==='Concrete' && styles.selected}`}
+                            //         onClick={()=>setTabType('Concrete')}
+                            //     >
+                            //         Примерные
+                            //     </div>
+                            //     <div 
+                            //         className={`${styles.tab} ${tabType==='Free' && styles.selected}`}
+                            //         onClick={()=>{
+                            //             setTabType('Free')
+                            //             updateDeliveryPackage({ name: ''})
+                            //         }}
+                            //     >
+                            //         Точные
+                            //     </div>
 
-                            </div>
+                            // </div>
+                            <Tab 
+                                nameTab1={'Примерный'}
+                                nameTab2={'Определенный'}
+                                tabType={tabType}
+                                onClickTab1={()=>setTabType('Concrete')}
+                                onClickTab2={()=>{
+                                    setTabType('Free')
+                                    updateDeliveryPackage({ name: ''})
+                                }}
+                            />
                         )}
                         {type==='package' && tabType==='Free' ? (
                             <div className={styles.freeSizeOption}>
