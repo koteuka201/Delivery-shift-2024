@@ -4,6 +4,7 @@ import { DeliveryRequest, Package } from "../@types/api";
 interface DeliveryContextProps{
     deliveryRequest: DeliveryRequest | undefined,
     updateDeliveryRequest: (updates: Partial<DeliveryRequest>)=>void
+    setDeliveryRequest: (newRequest: DeliveryRequest | undefined)=>void
 
     deliveryPackage: Package | undefined,
     updateDeliveryPackage: (updates: Partial<Package>) => void,
@@ -48,6 +49,7 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
     const value={
         deliveryRequest,
         updateDeliveryRequest,
+        setDeliveryRequest,
 
         deliveryPackage,
         updateDeliveryPackage,

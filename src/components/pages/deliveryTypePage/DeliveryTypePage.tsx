@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.scss'
 
 import { Plane, BusFront } from 'lucide-react'
@@ -9,8 +10,12 @@ import { CalculateDelivery } from '../../../@types/api'
 
 import { usePostCalculateDeliveryQuery } from '../../../hooks/usePostCalculateDeliveryQuery'
 import { useDeliveryContext } from '../../../context/DeliveryContext'
+import { ROUTES } from '../../../utils/constants/routes'
+
 
 export const DeliveryTypePage =()=>{
+
+    const navigate=useNavigate()
 
     const { mutate: calculateDelivery, data } = usePostCalculateDeliveryQuery()
     
@@ -52,14 +57,20 @@ export const DeliveryTypePage =()=>{
                                 price={data?.options[0].price}
                                 days={data?.options[0].days}
                                 icon={<Plane/>}
-                                onClick={()=>updateDeliveryRequest({option: data?.options[0]})}
+                                onClick={()=>{
+                                    updateDeliveryRequest({option: data?.options[0]})
+                                    navigate(ROUTES.PERSONALDATA)
+                                }}
                             />
                             <DeliveryTypeCard 
                                 label='Обычная доставка'
                                 price={data?.options[1].price}
                                 days={data?.options[1].days}
                                 icon={<BusFront/>}
-                                onClick={()=>updateDeliveryRequest({option: data?.options[1]})}
+                                onClick={()=>{
+                                    updateDeliveryRequest({option: data?.options[1]})
+                                    navigate(ROUTES.PERSONALDATA)
+                                }}
                             />
                         </>
                     }

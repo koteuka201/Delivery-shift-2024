@@ -2,6 +2,7 @@ import { ROUTES } from "../../utils/constants/routes";
 import { Route, Routes, } from "react-router-dom";
 import { CalculateDeliveryPage } from "../pages/calculateDeliveryPage/CalculateDeliveryPage";
 import { DeliveryTypePage } from "../pages/deliveryTypePage/DeliveryTypePage";
+import { PersonalDataPage } from "../pages/PersonalDataPage/PersonalDataPage";
 import { Header } from "../header/Header";
 
 export const Router =()=>{
@@ -18,7 +19,13 @@ export const Router =()=>{
                 <Header/>
                 <DeliveryTypePage/>
                 </>
-                }/>
+            }/>
+            <Route path={ROUTES.PERSONALDATA} element={
+                <>
+                <Header/>
+                <PersonalDataPage/>
+                </>
+            }/>
         </Routes>
     )
 } 
