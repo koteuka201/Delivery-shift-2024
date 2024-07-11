@@ -11,7 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, label,
     const id = useId()
 
     return (
-        <div>
+        <div className={styles.container}>
             <div className={styles.label}>
                 {label && (
                     <label htmlFor={id}>

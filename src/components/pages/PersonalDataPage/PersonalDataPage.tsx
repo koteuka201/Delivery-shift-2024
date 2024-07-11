@@ -1,44 +1,34 @@
 import styles from './styles.module.scss'
 import { useDeliveryContext } from '../../../context/DeliveryContext'
-import { Client, DeliveryRequest } from '../../../@types/api'
+import { Address, Client, DeliveryRequest } from '../../../@types/api'
 import { PersonalDataForm } from '../../../shared/PersonalDataForm/PersonalDataForm'
-import { useState } from 'react'
+import { createAddressFormData, createClientFormData } from './createFormData/createFormData'
+import { useEffect, useState } from 'react'
+import { createInitialAddress, createInitialClient } from './createInitialData/createInitialData'
 
 export interface FormData{
-    value: string | number | undefined,
+    value?: string | number | undefined,
     label: string,
     placeholder: string,
-    onChange: (value: string, parametr: keyof DeliveryRequest, subParametr: keyof Client)=>void
+    onChange: (value: string)=>void
 }
 
 export const PersonalDataPage=()=>{
 
-    const {deliveryRequest, updateDeliveryRequest}=useDeliveryContext()
-    debugger
-    const updateNestedParam =(parametr: keyof DeliveryRequest | undefined, subParametr: keyof Client, value: string)=>{
-        debugger
-        if (deliveryRequest && parametr) {
-            const updatedParam: Client = {
-              ...deliveryRequest[parametr] as Client,
-              [subParametr]: value,
-            }
-        
-            const update: DeliveryRequest = {
-              ...deliveryRequest,
-              [parametr]: updatedParam,
-            }
-        }
-    }
+    // const {deliveryRequest, updateDeliveryRequest}=useDeliveryContext()
     
-    const receiverForm: FormData[] = [
-        {
-            value: deliveryRequest?.receiver.lastname,
-            label: 'Фамилия',
-            placeholder: 'Фамилия',
-            onChange: (value) => updateNestedParam('receiver', 'lastname', value)
-        }
-    ]
 
+    const [receiver,setReceiver]=useState<Client>(createInitialClient())
+    const [sender,setSender]=useState<Client>(createInitialClient())
+    const [addressFrom,setAddressFrom]=useState<Address>(createInitialAddress())
+    const [addressTo,setAddressTo]=useState<Address>(createInitialAddress())
+
+    const receiverForm = createClientFormData(receiver, setReceiver)
+    const senderForm = createClientFormData(sender, setSender)
+    const addressFromFrom=createAddressFormData(addressFrom,setAddressFrom)
+    const addressToFrom=createAddressFormData(addressTo,setAddressTo)
+    console.log(receiverForm);
+    
     return(
         <div className={styles.container}>
             <div className={styles.formContainer}>
