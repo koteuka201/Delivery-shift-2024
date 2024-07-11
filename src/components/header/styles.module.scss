@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 100%;
+    height: 80px;
+
+    border-bottom: $content-07 solid 1px;
+}
+
+.container{
+    display: flex;
+    
+    width: 960px;
+}
+
+.leftSide{
+    display: flex;
+    align-items: start;
+
+    gap: 32px;
+
+}
+
+.headerItem{
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+.rightSide{
+    margin-left: auto;
+}

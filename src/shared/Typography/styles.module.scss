@@ -49,6 +49,9 @@
 }
 
 .p_16_medium {
+    margin: 0;
+
     font-size: 16px;
-    //
+    font-family: $inter-500;
+    color: $text-secondary;
 }
