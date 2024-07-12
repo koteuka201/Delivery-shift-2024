@@ -19,7 +19,7 @@ export const DeliveryTypePage =()=>{
 
     const { mutate: calculateDelivery, data } = usePostCalculateDeliveryQuery()
     
-    const { deliveryRequest , updateDeliveryRequest, deliveryPackage}=useDeliveryContext()
+    const { deliveryRequest , updateDeliveryRequest, deliveryPackage, updateFormState}=useDeliveryContext()
     
     useEffect(()=>{
         if(deliveryRequest && deliveryPackage!== undefined){
@@ -59,6 +59,7 @@ export const DeliveryTypePage =()=>{
                                 icon={<Plane/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[0]})
+                                    updateFormState({receiverForm: true})
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />
@@ -69,6 +70,7 @@ export const DeliveryTypePage =()=>{
                                 icon={<BusFront/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[1]})
+                                    updateFormState({receiverForm: true, senderForm: false, addressFromForm: false, addressToForm: false})
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />

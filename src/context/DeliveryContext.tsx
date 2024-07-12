@@ -1,6 +1,15 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { DeliveryRequest, Package } from "../@types/api";
 
+interface FormStates{
+    receiverForm: boolean,
+    senderForm: boolean,
+    addressFromForm: boolean,
+    addressToForm: boolean,
+    payerForm: boolean,
+    confirmOrder: boolean
+}
+
 interface DeliveryContextProps{
     deliveryRequest: DeliveryRequest | undefined,
     updateDeliveryRequest: (updates: Partial<DeliveryRequest>)=>void
@@ -9,6 +18,9 @@ interface DeliveryContextProps{
     deliveryPackage: Package | undefined,
     updateDeliveryPackage: (updates: Partial<Package>) => void,
     setDeliveryPackage: (newPackage: Package | undefined) => void
+
+    formStates: FormStates,
+    updateFormState: (updates: Partial<FormStates>) => void
 }
 
 const DeliveryContext = createContext<DeliveryContextProps | undefined>(undefined)
@@ -16,7 +28,7 @@ const DeliveryContext = createContext<DeliveryContextProps | undefined>(undefine
 export const useDeliveryContext = () =>{
     const context = useContext(DeliveryContext)
 
-    if (context === undefined) {
+    if (!context) {
         throw new Error("err");
     }
 
@@ -27,6 +39,14 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
 
     const [deliveryRequest, setDeliveryRequest]=useState<DeliveryRequest>()
     const [deliveryPackage, setDeliveryPackage] = useState<Package>();
+    const [formStates, setFormStates]=useState<FormStates>({
+        receiverForm: false,
+        senderForm: false,
+        addressFromForm: false,
+        addressToForm: false,
+        payerForm:false,
+        confirmOrder: false
+    })
 
     const updateDeliveryRequest = (updates: Partial<DeliveryRequest>) => {
         setDeliveryRequest((prev) => {
@@ -37,6 +57,12 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
         })
     }
 
+    const updateFormState=(update: Partial<FormStates>)=>{
+        setFormStates((prev)=>{
+            return {...prev, ...update}
+        })
+    }
+
     const updateDeliveryPackage = (updates: Partial<Package>) => {
         setDeliveryPackage((prev) => {
             if (prev === undefined) {
@@ -44,7 +70,7 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
             }
             return { ...prev, ...updates }
         })
-    }
+    } 
 
     const value={
         deliveryRequest,
@@ -53,7 +79,10 @@ export const DeliveryContextProvider = (props: {children:ReactNode})=>{
 
         deliveryPackage,
         updateDeliveryPackage,
-        setDeliveryPackage
+        setDeliveryPackage,
+
+        formStates,
+        updateFormState
     }
 
     return <DeliveryContext.Provider value={value}>{props.children}</DeliveryContext.Provider>

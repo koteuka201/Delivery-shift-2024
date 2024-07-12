@@ -40,41 +40,41 @@ export const createClientFormData = (client: Client, setClient: React.Dispatch<R
     }
 ]
 
-export const createAddressFormData = (address: Address, setClient: React.Dispatch<React.SetStateAction<Address>>): FormData[] => [
+export const createAddressFormData = (address: Address, setAddress: React.Dispatch<React.SetStateAction<Address>>): FormData[] => [
     {
         value: address.street,
         label: 'Улица',
         placeholder: 'Улица',
-        onChange: (value: string) => setClient(prev => ({
+        onChange: (value: string) => setAddress(prev => ({
             ...prev,
-            lastname: value
+            street: value
         }))
     },
     {
         value: address.house,
         label: 'Номер дома',
         placeholder: 'Номер дома',
-        onChange: (value: string) => setClient(prev => ({
+        onChange: (value: string) => setAddress(prev => ({
             ...prev,
-            firstname: value
+            house: value
         }))
     },
     {
         value: address.apartment,
         label: 'Номер квартиры',
         placeholder: 'Номер квартиры',
-        onChange: (value: string) => setClient(prev => ({
+        onChange: (value: string) => setAddress(prev => ({
             ...prev,
-            middlename: value
+            apartment: value
         }))
     },
     {
         value: address.comment,
         label: 'Заметка',
         placeholder: 'Заметка',
-        onChange: (value: string) => setClient(prev => ({
+        onChange: (value: string) => setAddress(prev => ({
             ...prev,
-            phone: value
+            comment: value
         }))
     }
 ]

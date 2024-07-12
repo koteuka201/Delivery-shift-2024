@@ -1,21 +1,32 @@
 import styles from './styles.module.scss'
+
+import { useForm } from 'react-hook-form'
+
 import { FormData } from "../../components/pages/PersonalDataPage/PersonalDataPage"
 import { Typography } from '../Typography/Typography'
 import { Input } from '../Input/Input'
 import { Button } from '../Button/Button'
+import { DeliveryRequest } from '../../@types/api'
 
 interface PersonalDataFormProps{
+    option: keyof DeliveryRequest,
     label: string,
     formData: FormData[],
-    onClickContinue?: ()=> void,
+    onClickContinue: ()=> void,
     onClickBack?: ()=> void
 }
 
-export const PersonalDataForm=({label, formData, onClickContinue, onClickBack}:PersonalDataFormProps)=>{
+export const PersonalDataForm=({option,label, formData, onClickContinue, onClickBack}:PersonalDataFormProps)=>{
     
+    const {handleSubmit}=useForm()
+
+    const onSubmit = () => {
+        onClickContinue()
+    }
     
+
     return(
-        <form className={styles.container}>
+        <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
             <Typography variant='h2'>
                 {label}
             </Typography>
@@ -33,8 +44,8 @@ export const PersonalDataForm=({label, formData, onClickContinue, onClickBack}:P
                 <Button targetButton='Back' onClick={onClickBack}>
                     Назад
                 </Button>
-                <Button targetButton='Next' onClick={onClickContinue}>
-                    Назад
+                <Button targetButton='Next' type="submit" onClick={onClickContinue}>
+                    Продолжить
                 </Button>
             </div>
         </form>

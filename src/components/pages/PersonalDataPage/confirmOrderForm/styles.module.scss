@@ -1,0 +1,31 @@
+.container{
+    width: 960px;
+}
+
+.bottomSection{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+    padding: 12px 0;
+    margin-top: 24px;
+    width: 100%;
+}
+
+.bottomItemUpper{
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: end;
+}
+.bottomItemLower{
+    width: 100%;
+    display: grid;
+    text-align: end;
+    gap: 4px;
+}
+
+.btnContainer{
+    display: flex;
+    width: 100%;
+    gap: 304px;
+}

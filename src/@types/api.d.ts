@@ -27,16 +27,6 @@ interface Client{
     phone: string,
 }
 
-enum Payer{
-    RECEIVER,
-    SENDER
-}
-
-enum TypeDelivery{
-    DEFAULT,
-    EXPRESS
-}
-
 export interface DeliveryRequest{
     senderPoint: Point,
     senderAddress: Address,
@@ -44,7 +34,7 @@ export interface DeliveryRequest{
     receiverPoint: Point,
     receiverAddress: Address,
     receiver: Client,
-    payer: Payer,
+    payer: 'SENDER' | 'RECEIVER',
     option: DeliveryOption
 }
 
@@ -82,7 +72,7 @@ interface DeliveryOption{
     price: number,
     days: number,
     name: string,
-    type: TypeDelivery
+    type: 'EXPRESS' | 'DEFAULT'
 }
 
 export interface CalculateDeliveryResponse{

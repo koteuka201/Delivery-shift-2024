@@ -27,5 +27,8 @@
         border: $content-07 solid 1px;
 
         color: $text-secondary;
+        &:hover{
+            background-color: $content-07;
+        }
     }
 }
