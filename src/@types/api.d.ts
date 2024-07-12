@@ -80,3 +80,14 @@ export interface CalculateDeliveryResponse{
     reason?: string,
     options: DeliveryOption[]
 }
+
+export interface CreateDeliveryOrderResponse extends Omit<DeliveryRequest,'option'>{
+    status: number,
+    cancellable: boolean,
+}
+
+export interface CreateDeliveryOrder{
+    success: boolean,
+    reason?: string,
+    order: DeliveryRequest,
+}

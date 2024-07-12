@@ -6,17 +6,15 @@ import { FormData } from "../../components/pages/PersonalDataPage/PersonalDataPa
 import { Typography } from '../Typography/Typography'
 import { Input } from '../Input/Input'
 import { Button } from '../Button/Button'
-import { DeliveryRequest } from '../../@types/api'
 
 interface PersonalDataFormProps{
-    option: keyof DeliveryRequest,
     label: string,
     formData: FormData[],
     onClickContinue: ()=> void,
     onClickBack?: ()=> void
 }
 
-export const PersonalDataForm=({option,label, formData, onClickContinue, onClickBack}:PersonalDataFormProps)=>{
+export const PersonalDataForm=({label, formData, onClickContinue, onClickBack}:PersonalDataFormProps)=>{
     
     const {handleSubmit}=useForm()
 

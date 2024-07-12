@@ -39,7 +39,6 @@ export const PersonalDataPage=()=>{
             <div className={styles.formContainer}>
                 {formStates.receiverForm &&
                     <PersonalDataForm 
-                        option={'receiver'}
                         label={'Получатель'}
                         formData={receiverForm}
                         onClickContinue={()=>updateFormState({receiverForm: false, senderForm: true})}
@@ -51,7 +50,6 @@ export const PersonalDataPage=()=>{
                 }
                 {formStates.senderForm &&
                     <PersonalDataForm 
-                        option={'sender'}
                         label={'Отправитель'}
                         formData={senderForm}
                         onClickContinue={()=>updateFormState({senderForm: false, addressFromForm: true})}
@@ -60,7 +58,6 @@ export const PersonalDataPage=()=>{
                 }
                 {formStates.addressFromForm &&
                     <PersonalDataForm 
-                        option={'senderAddress'}
                         label={'Откуда забрать'}
                         formData={addressFromForm}
                         onClickContinue={()=>updateFormState({addressFromForm: false, addressToForm: true})}
@@ -69,7 +66,6 @@ export const PersonalDataPage=()=>{
                 }
                 {formStates.addressToForm &&
                     <PersonalDataForm 
-                        option={'receiverAddress'}
                         label={'Куда доставить'}
                         formData={addressToForm}
                         onClickContinue={()=>updateFormState({addressToForm: false, payerForm: true})}

@@ -54,23 +54,37 @@ export const DeliveryTypePage =()=>{
                         <>
                             <DeliveryTypeCard 
                                 label='Экспресс доставка до двери'
-                                price={data?.options[0].price}
-                                days={data?.options[0].days}
+                                price={data?.options[1].price}
+                                days={data?.options[1].days}
                                 icon={<Plane/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[0]})
-                                    updateFormState({receiverForm: true})
+                                    updateFormState({
+                                        receiverForm: true,
+                                        senderForm: false, 
+                                        addressFromForm: false, 
+                                        addressToForm: false,
+                                        payerForm: false,
+                                        confirmOrder:false
+                                    })
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />
                             <DeliveryTypeCard 
                                 label='Обычная доставка'
-                                price={data?.options[1].price}
-                                days={data?.options[1].days}
+                                price={data?.options[0].price}
+                                days={data?.options[0].days}
                                 icon={<BusFront/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[1]})
-                                    updateFormState({receiverForm: true, senderForm: false, addressFromForm: false, addressToForm: false})
+                                    updateFormState({
+                                        receiverForm: true,
+                                        senderForm: false, 
+                                        addressFromForm: false, 
+                                        addressToForm: false,
+                                        payerForm: false,
+                                        confirmOrder:false
+                                    })
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />

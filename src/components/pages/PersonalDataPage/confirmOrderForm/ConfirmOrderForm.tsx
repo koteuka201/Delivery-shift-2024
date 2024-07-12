@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { useDeliveryContext } from '../../../../context/DeliveryContext'
+import { usePostCreateOrderQuery } from '../../../../hooks/usePostCreateOrderQuery'
 import { Button } from '../../../../shared/Button/Button'
 import { Typography } from '../../../../shared/Typography/Typography'
 import { getDayText } from '../../../../utils/helpers/getDayText'
@@ -14,13 +16,19 @@ const deliveryOptions=(value: 'EXPRESS'| 'DEFAULT'|undefined)=>{
 export const ConfirmOrderForm=()=>{
     
     const {deliveryRequest, updateDeliveryRequest, updateFormState}=useDeliveryContext()
-    
-    const handleSubmit=()=>{
+    const {mutate: createOrder}=usePostCreateOrderQuery()
+    const [isModalOpen, setIsModalOpen]=useState(false)
 
+    const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        if(deliveryRequest){
+            createOrder(deliveryRequest)
+            setIsModalOpen(true)
+        }
     }
 
     return(
-        <form className={styles.container}>
+        <form className={styles.container} onSubmit={handleSubmit}>
             <Typography variant='h2'>
                 Проверка данных заказа
             </Typography>
@@ -95,7 +103,7 @@ export const ConfirmOrderForm=()=>{
                 <Button targetButton='Back' onClick={()=>updateFormState({confirmOrder: false, payerForm: true})}>
                     Назад
                 </Button>
-                <Button targetButton='Next' type="submit" onClick={handleSubmit}>
+                <Button targetButton='Next' type="submit">
                     Продолжить
                 </Button>
             </div>
