@@ -3,7 +3,7 @@ import { useDeliveryContext } from '../../../context/DeliveryContext'
 import { Address, Client} from '../../../@types/api'
 import { PersonalDataForm } from '../../../shared/PersonalDataForm/PersonalDataForm'
 import { createAddressFormData, createClientFormData } from './createFormData/createFormData'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createInitialAddress, createInitialClient } from './createInitialData/createInitialData'
 import { useNavigate } from 'react-router-dom'
 import { PayerForm } from './payerForm/payerForm'
@@ -33,7 +33,17 @@ export const PersonalDataPage=()=>{
     const addressFromForm=createAddressFormData(addressFrom,setAddressFrom)
     const addressToForm=createAddressFormData(addressTo,setAddressTo)
         
-    
+    useEffect(()=>{
+        updateFormState({
+            receiverForm: true,
+            senderForm: false, 
+            addressFromForm: false, 
+            addressToForm: false,
+            payerForm: false,
+            confirmOrder:false
+        })
+    },[])
+
     return(
         <div className={styles.container}>
             <div className={styles.formContainer}>

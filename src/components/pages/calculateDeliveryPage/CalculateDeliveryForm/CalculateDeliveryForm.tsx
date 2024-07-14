@@ -41,7 +41,6 @@ export const CalculateDeliveryForm = ()=>{
     }
 
     const onSubmit = () => {
-        console.log('tap')
         navigate(`${ROUTES.DELIVERY_TYPE}`)
     }
 

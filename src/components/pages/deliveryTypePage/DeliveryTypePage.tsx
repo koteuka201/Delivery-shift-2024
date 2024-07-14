@@ -59,14 +59,6 @@ export const DeliveryTypePage =()=>{
                                 icon={<Plane/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[0]})
-                                    updateFormState({
-                                        receiverForm: true,
-                                        senderForm: false, 
-                                        addressFromForm: false, 
-                                        addressToForm: false,
-                                        payerForm: false,
-                                        confirmOrder:false
-                                    })
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />
@@ -77,14 +69,6 @@ export const DeliveryTypePage =()=>{
                                 icon={<BusFront/>}
                                 onClick={()=>{
                                     updateDeliveryRequest({option: data?.options[1]})
-                                    updateFormState({
-                                        receiverForm: true,
-                                        senderForm: false, 
-                                        addressFromForm: false, 
-                                        addressToForm: false,
-                                        payerForm: false,
-                                        confirmOrder:false
-                                    })
                                     navigate(ROUTES.PERSONALDATA)
                                 }}
                             />
