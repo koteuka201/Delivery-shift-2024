@@ -8,7 +8,7 @@ export const CalculateDeliveryPage=()=>{
         <div className={styles.background}>
             <div className={styles.container}>
                 <div className={styles.imgContainer}>
-                    <img src="/CalculateDeliveryPageImg/Frame.svg" alt="Frame" />
+                    <img src="/CalculateDeliveryPageImg/Frame.png" alt="Frame" />
                 </div>
                 <div className={styles.h1Container}>
                     <Typography variant='h1'>

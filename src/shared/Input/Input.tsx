@@ -11,12 +11,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ isError, label,
     const id = useId()
 
     return (
-        <div>
-            {label && (
-                <label className={styles.label} htmlFor={id}>
-                    {label}
-                </label>
-            )}
+        <div className={styles.container}>
+            <div className={styles.label}>
+                {label && (
+                    <label htmlFor={id}>
+                        {label}
+                    </label>
+                )}
+            </div>
             <input {...props} ref={ref} id={id} className={styles.input} />
             {message && <p className={styles.message}>{message}</p>}
         </div>

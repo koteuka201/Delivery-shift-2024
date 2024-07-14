@@ -8,7 +8,7 @@ interface ButtonProps extends React.ComponentProps<'button'>{
 export const Button =({targetButton, ...props}:ButtonProps)=>{
     return(
         <button
-            className={`${styles.button} ${targetButton==='Back' && styles.backStyles}`}
+            className={`${styles.button} ${targetButton==='Back' && styles.backStyle}`}
             {...props}
         >
             {props.children}

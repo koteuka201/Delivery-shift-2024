@@ -1,3 +1,4 @@
+import { Package } from './api.d';
 
 export interface Point{
     id: string,
@@ -26,24 +27,6 @@ interface Client{
     phone: string,
 }
 
-interface Option{
-    id: string,
-    price: number,
-    days: number,
-    name: string,
-    type:TypeDelivery
-}
-
-enum Payer{
-    RECEIVER,
-    SENDER
-}
-
-enum TypeDelivery{
-    DEFAULT,
-    EXPRESS
-}
-
 export interface DeliveryRequest{
     senderPoint: Point,
     senderAddress: Address,
@@ -51,13 +34,16 @@ export interface DeliveryRequest{
     receiverPoint: Point,
     receiverAddress: Address,
     receiver: Client,
-    payer: Payer,
-    option: Option
+    payer: 'SENDER' | 'RECEIVER',
+    option: DeliveryOption
 }
 
-export interface Package{
+export interface Package extends PackageCurrent{
     id: string,
     name: string,
+}
+
+export interface PackageCurrent{
     length: number,
     width: number,
     weight: number,
@@ -68,4 +54,40 @@ export interface DeliveryPackage{
     success: boolean,
     reason?: string,
     packages: Package[]
+}
+
+interface Coordinates{
+    latitude:number,
+    longitude: number
+}
+
+export interface CalculateDelivery{
+    package: PackageCurrent,
+    senderPoint: Coordinates,
+    receiverPoint: Coordinates
+}
+
+interface DeliveryOption{
+    id: string,
+    price: number,
+    days: number,
+    name: string,
+    type: 'EXPRESS' | 'DEFAULT'
+}
+
+export interface CalculateDeliveryResponse{
+    success: boolean,
+    reason?: string,
+    options: DeliveryOption[]
+}
+
+export interface CreateDeliveryOrderResponse extends Omit<DeliveryRequest,'option'>{
+    status: number,
+    cancellable: boolean,
+}
+
+export interface CreateDeliveryOrder{
+    success: boolean,
+    reason?: string,
+    order: DeliveryRequest,
 }

@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.label{
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: $inter-400;
+    color: $bg-tertiary;
+
+}
+
+.underline{
+    border-bottom: $bg-tertiary solid 1px;
+}

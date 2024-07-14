@@ -1,0 +1,30 @@
+
+.container{
+    width: 464px;
+}
+
+.defaultMargin{
+    display: grid;
+
+    gap: 16px;
+    max-width: 100%;
+    margin-top: 26px;
+}
+
+.radioBtnContainer{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.radioBtn{
+    width: 20px;
+    height: 20px;
+}
+
+.btnContainer{
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    gap: 24px;
+}
