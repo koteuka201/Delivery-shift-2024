@@ -6,6 +6,8 @@ import { Typography } from '../../../../shared/Typography/Typography'
 import { getDayText } from '../../../../utils/helpers/getDayText'
 import { ConfirmInfoCard } from './ConfirmInfoCard/ConfirmInfoCard'
 import styles from './styles.module.scss'
+import { OrderModal } from './OrderModal/OrderModal'
+import { Modal } from '../../../../shared/Modal/Modal'
 
 const deliveryOptions=(value: 'EXPRESS'| 'DEFAULT'|undefined)=>{
     if(!value) return 0
@@ -22,12 +24,13 @@ export const ConfirmOrderForm=()=>{
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         if(deliveryRequest){
-            createOrder(deliveryRequest)
+            // createOrder(deliveryRequest)
             setIsModalOpen(true)
         }
     }
 
     return(
+        <>
         <form className={styles.container} onSubmit={handleSubmit}>
             <Typography variant='h2'>
                 Проверка данных заказа
@@ -108,5 +111,10 @@ export const ConfirmOrderForm=()=>{
                 </Button>
             </div>
         </form>
+        <Modal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}>
+            <OrderModal/>
+        </Modal>
+        
+        </>
     )
 }
