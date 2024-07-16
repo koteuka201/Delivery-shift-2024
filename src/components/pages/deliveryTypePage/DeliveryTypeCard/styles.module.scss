@@ -17,17 +17,20 @@
 
     color: #97A1AF;
 
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
 
     &:hover{
         background-color: $bg-brand;
+        
         .iconWrapper {
+            transition: background-color 0.5s, color 0.5s;
             color: $bg-brand;
             background-color: white;
         }
 
         .content {
             .typography {
+                transition: color 0.5s;
                 color: white;
             }
         }

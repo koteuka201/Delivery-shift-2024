@@ -6,7 +6,7 @@ import { Plane, BusFront } from 'lucide-react'
 
 import { Typography } from '../../../shared/Typography/Typography'
 import { DeliveryTypeCard } from './DeliveryTypeCard/DeliveryTypeCard'
-import { CalculateDelivery } from '../../../@types/api'
+import { CalculateDelivery, DeliveryOption } from '../../../@types/api'
 
 import { usePostCalculateDeliveryQuery } from '../../../hooks/usePostCalculateDeliveryQuery'
 import { useDeliveryContext } from '../../../context/DeliveryContext'
@@ -17,7 +17,7 @@ export const DeliveryTypePage =()=>{
 
     const navigate=useNavigate()
 
-    const { mutate: calculateDelivery, data } = usePostCalculateDeliveryQuery()
+    const { mutate: calculateDelivery, data, isPending } = usePostCalculateDeliveryQuery()
     
     const { deliveryRequest , updateDeliveryRequest, deliveryPackage}=useDeliveryContext()
     
@@ -43,6 +43,13 @@ export const DeliveryTypePage =()=>{
         }
     },[])
 
+    const handleClick = (option: DeliveryOption | undefined) => {
+        if (!isPending) {
+            updateDeliveryRequest({ option });
+            navigate(ROUTES.PERSONALDATA);
+        }
+    }
+
     return(
         <div className={styles.containerWrapper}>
             <div className={styles.typesWrapper}>
@@ -50,30 +57,26 @@ export const DeliveryTypePage =()=>{
                     Способ отправки
                 </Typography>
                 <div className={styles.typesContainer}>
-                    {data?.options && 
-                        <>
+                    {/* {data?.options && 
+                        <> */}
                             <DeliveryTypeCard 
                                 label='Экспресс доставка до двери'
                                 price={data?.options[1].price}
                                 days={data?.options[1].days}
                                 icon={<Plane/>}
-                                onClick={()=>{
-                                    updateDeliveryRequest({option: data?.options[0]})
-                                    navigate(ROUTES.PERSONALDATA)
-                                }}
+                                onClick={() => handleClick(data?.options[1])}
+                                isPending={isPending}
                             />
                             <DeliveryTypeCard 
                                 label='Обычная доставка'
                                 price={data?.options[0].price}
                                 days={data?.options[0].days}
                                 icon={<BusFront/>}
-                                onClick={()=>{
-                                    updateDeliveryRequest({option: data?.options[1]})
-                                    navigate(ROUTES.PERSONALDATA)
-                                }}
+                                onClick={() => handleClick(data?.options[0])}
+                                isPending={isPending}
                             />
-                        </>
-                    }
+                        {/* </>
+                    } */}
                 </div>
             </div>
         </div>
