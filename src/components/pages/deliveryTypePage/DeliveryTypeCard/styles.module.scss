@@ -15,9 +15,22 @@
     padding: 16px;
     border-radius: 24px;
 
-    &.selected{
+    color: #97A1AF;
+
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover{
         background-color: $bg-brand;
-        border: 0;
+        .iconWrapper {
+            color: $bg-brand;
+            background-color: white;
+        }
+
+        .content {
+            .typography {
+                color: white;
+            }
+        }
     }
 }
 
@@ -31,6 +44,7 @@
 
 .content{
     margin-left: 16px;
+
 }
 
 .iconWrapper{
@@ -43,5 +57,4 @@
     background-color: $bg-secondary;
 
     border-radius: 50%;
-
 }

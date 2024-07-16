@@ -18,13 +18,13 @@ export const DeliveryTypeCard=({label, price, days, icon, onClick}:DeliveryTypeC
                 {icon}
             </div>
             <div className={styles.content}>
-                <Typography variant='p_12_regular'>
+                <Typography variant='p_12_regular' className={styles.typography}>
                     {label} ₽
                 </Typography>
-                <Typography variant='h3' className={styles.price}>
+                <Typography variant='h3' className={`${styles.price} ${styles.typography}`}>
                     {price} ₽
                 </Typography>
-                <Typography variant='p_12_regular' className={styles.days}>
+                <Typography variant='p_12_regular' className={`${styles.days} ${styles.typography}`}>
                     {getDayText(days)}
                 </Typography>
             </div>

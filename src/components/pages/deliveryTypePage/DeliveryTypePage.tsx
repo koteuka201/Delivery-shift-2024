@@ -19,7 +19,7 @@ export const DeliveryTypePage =()=>{
 
     const { mutate: calculateDelivery, data } = usePostCalculateDeliveryQuery()
     
-    const { deliveryRequest , updateDeliveryRequest, deliveryPackage, updateFormState}=useDeliveryContext()
+    const { deliveryRequest , updateDeliveryRequest, deliveryPackage}=useDeliveryContext()
     
     useEffect(()=>{
         if(deliveryRequest && deliveryPackage!== undefined){
